@@ -15,7 +15,6 @@ pinned: false
 
 [![Generic badge](https://img.shields.io/badge/🤗-Open%20In%20Spaces-blue.svg)](https://huggingface.co/spaces/nateraw/test-space-lfs)
 [![Github Badge](https://img.shields.io/github/stars/nateraw/test-space-lfs?style=social)](https://github.com/nateraw/test-space-lfs)
-[![Template badge](https://img.shields.io/badge/🤗-Spaces%20Template-red.svg)](https://huggingface.co/spaces/nateraw/spaces-template)
 
 </div>
 
@@ -39,7 +38,7 @@ This has a few benefits:
 
 Use this template to create and sync a GitHub repo with a 🤗 Spaces repo:
 
-[![Spaces Template](https://img.shields.io/badge/🤗-Spaces%20Template-red.svg)](https://huggingface.co/spaces/nateraw/spaces-template)
+[![Spaces Template](https://img.shields.io/badge/🤗-Spaces%20Template-red.svg)](https://github.com/nateraw/spaces-template)
 
 
 ## Step 2 - Update the GitHub Actions Workflow
