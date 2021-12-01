@@ -76,8 +76,9 @@ We make updates to the `run` section of the workflow to add the following:
 
 Here, after we've checked out the GitHub repo via the generic actions/checkout workflow, we...
 
-- define our git config
-- add the spaces repo as a remote called `hf`
+- Add `GIT_LFS_SKIP_SMUDGE` to the `env` section of the workflow
+- Define our git config - you should put your own info here, not mine!
+- Add the spaces repo as a remote called `hf`
 - Fetch the remote to get the history - Since we defined `GIT_LFS_SKIP_SMUDGE` as 1, we'll just download ref files, not the actual LFS files.
 - Rebase the history from the remote (spaces repo) to the local (GitHub) repo
 - Push up to the Hugging Face Spaces repo
@@ -86,4 +87,26 @@ Here, after we've checked out the GitHub repo via the generic actions/checkout w
 
 ## Step 3 - Add LFS Files
 
-...todo...
+To add LFS files to your Spaces repo, you can either clone the repo separately, or add it as a remote and checkout the main branch from there... I find cloning it separately is easier, and I usually just delete it when I'm done. (Or maybe I'm just too lazy to figure out the steps to the latter 😅)
+
+```bash
+git clone huggingface.co/spaces/nateraw/test-space-lfs
+cd test-space-lfs
+git lfs install
+git add <some large file>
+```
+
+Check that the files are being tracked before commiting! they should show up under "Git LFS objects to be committed" and should have (LFS: ...) at the end, not (Git: ...)
+
+``` 
+git lfs status
+```
+
+If the above doesn't look right, make sure you've added the right pattern to your `.gitattributes` file. 
+
+Once finished, commit your data and push it to the Spaces repo.
+
+```
+git commit -m "Add data"
+git push -u origin main
+```
