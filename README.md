@@ -76,10 +76,10 @@ We make updates to the `run` section of the workflow to add the following:
 
 Here, after we've checked out the GitHub repo via the generic actions/checkout workflow, we...
 
-- Add `GIT_LFS_SKIP_SMUDGE` to the `env` section of the workflow
+- Add `GIT_LFS_SKIP_SMUDGE` to the `env` section of the workflow. This makes it so we'll just download ref files, not the actual LFS files when updating the history.
 - Define our git config - you should put your own info here, not mine!
 - Add the spaces repo as a remote called `hf`
-- Fetch the remote to get the history - Since we defined `GIT_LFS_SKIP_SMUDGE` as 1, we'll just download ref files, not the actual LFS files.
+- Fetch the remote to get the history of the spaces repo.
 - Rebase the history from the remote (spaces repo) to the local (GitHub) repo
 - Push up to the Hugging Face Spaces repo
 
@@ -110,3 +110,11 @@ Once finished, commit your data and push it to the Spaces repo.
 git commit -m "Add data"
 git push -u origin main
 ```
+
+## Limitations/Additional Thoughts
+
+⚠️ Don't update code files in the Spaces repo directly. If you do, you'll run into merge conficts in the actions workflow, and you'll have a bad time.
+
+My suggestion is to keep your LFS files in a subdirectory in your repo, so it's harder to screw things up.
+
+TODO - look into using remote `hf` to add the files locally instead of a copy...the whole point of syncing GitHub to begin with was to avoid having 2 copies of the same thing, so we should really figure this out! (❤️ Contributions appreciated!)
