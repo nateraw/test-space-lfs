@@ -8,7 +8,7 @@ app_file: app.py
 pinned: false
 ---
 
-# Test Space LFS
+# Using LFS on Hugging Face Spaces
 
 [![Generic badge](https://img.shields.io/badge/🤗-Open%20In%20Spaces-blue.svg)](https://huggingface.co/spaces/nateraw/test-space-lfs)
 
