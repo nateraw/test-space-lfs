@@ -19,6 +19,8 @@ jobs:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
           GIT_LFS_SKIP_SMUDGE: 1
         run: |
+          git config --global user.email "naterawdata@gmail.com"
+          git config --global user.name "nateraw"
           git remote add hf https://nateraw:$HF_TOKEN@huggingface.co/spaces/nateraw/test-space-lfs
           git fetch --all --prune
           git rebase hf/main
