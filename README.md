@@ -110,6 +110,73 @@ git commit -m "Add data"
 git push -u origin main
 ```
 
+## Push via adding spaces as remote locally ⚠️ WIP, not working!!!⚠️ 
+
+
+Make sure you're on latest version from origin (GitHub)
+
+git pull
+
+Add new remote called hf
+
+```
+git remote add hf https://nateraw:$HF_TOKEN@huggingface.co/spaces/nateraw/test-space-lfs
+```
+
+Fetch the remote history, ignoring downloads of the actual files.
+
+```
+GIT_LFS_SKIP_SMUDGE=1 git fetch --all --prune
+git checkout -b add_lfs_files hf/main
+```
+
+Add LFS files
+
+```
+mkdir cache_dir
+cp /path/to/large_file.bin ./cache_dir'
+git add ./cache_dir
+```
+
+In my case, I am adding `pytorch_model_3.bin`. So, my local copy right now looks like this... 
+
+```
+cache_dir
+├── [ 133]  pytorch_model.bin
+├── [ 133]  pytorch_model_2.bin
+└── [ 90M]  pytorch_model_3.bin
+```
+
+Note - `pytorch_model.bin` and `pytorch_model_2.bin` are also 90MB, but are just references to files in LFS storage so they appear to be just 133 bytes.
+
+Next, check that the files are being tracked before commiting! they should show up under "Git LFS objects to be committed" and should have (LFS: ...) at the end, not (Git: ...). This will only show after you've run `git add <your large file>`.
+
+``` 
+$ git lfs status
+
+On branch add_lfs_files
+Objects to be pushed to hf/main:
+
+
+Objects to be committed:
+
+        cache_dir/pytorch_model_3.bin (LFS: 9bcc6b3)
+
+Objects not staged for commit:
+
+```
+
+If the above doesn't look right, make sure you've added the right pattern to your `.gitattributes` file. 
+
+If it looks good, commit your files and push them to the Spaces repo.
+
+```
+git commit -m "Add data"
+git push hf main
+```
+
+---
+
 ## Limitations/Additional Thoughts
 
 ⚠️ Don't update code files in the Spaces repo directly. If you do, you'll run into merge conficts in the actions workflow, and you'll have a bad time.
@@ -117,3 +184,4 @@ git push -u origin main
 My suggestion is to keep your LFS files in a subdirectory in your repo, so it's harder to screw things up.
 
 TODO - look into using remote `hf` to add the files locally instead of a copy...the whole point of syncing GitHub to begin with was to avoid having 2 copies of the same thing, so we should really figure this out! (❤️ Contributions appreciated!)
+
