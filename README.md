@@ -1,5 +1,5 @@
 ---
-title: Test Space LFS
+title: GitHub + Spaces + LFS = ❤️
 emoji: 🤗
 colorFrom: blue
 colorTo: red
