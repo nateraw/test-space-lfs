@@ -18,3 +18,4 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: git push https://nateraw:$HF_TOKEN@huggingface.co/spaces/nateraw/test-space-lfs main --no-verify
+
