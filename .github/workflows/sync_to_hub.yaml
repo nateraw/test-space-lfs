@@ -18,7 +18,7 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
           GIT_LFS_SKIP_SMUDGE: 1
-        run:
+        run: |
           git remote add hf https://nateraw:$HF_TOKEN@huggingface.co/spaces/nateraw/test-space-lfs
           git fetch --all --prune
           git rebase hf/main
